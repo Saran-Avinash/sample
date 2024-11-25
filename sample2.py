@@ -2,6 +2,8 @@
 #sudo apt update
 #sudo apt upgrade
 #sudo apt install git
+#iyau pohs vhke wppc
+
 
 import RPi.GPIO as GPIO
 import time
