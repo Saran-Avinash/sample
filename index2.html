@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LED</title>
+</head>
+<body>
+    <form method ="get" action ="web.php">
+        <input type ="hidden" name ="led" value= "1">
+        <button type="submit" name ="state" value="on">ON</button>
+        <button type="submit" name ="state" value="off">OFF</button>
+    </form>
+    <form action="web.php" method ="get">
+        <input type="hidden" name ="led" value = "2">
+        <button type="submit" name ="state" value="on">ON</button>
+        <button type="submit" name ="state" value="off">OFF</button>
+    </form>
+    <form action="web.php" method ="get">
+        <input type="hidden" name ="led" value = "3">
+        <button type="submit" name ="state" value="on">ON</button>
+        <button type="submit" name ="state" value="off">OFF</button>
+    </form>
+    <?php
+        if(isset($_GET['led']) && isset($_GET['state'])){
+            $led = intval($_GET['led']);
+            $state = $_GET['state'];
+            if($led == 1)
+            {
+                $pin = 17;
+            }
+            else if($led == 2)
+            {
+                $pin = 27;
+            }
+            else if($led == 3)
+            {
+                $pin = 22;
+            }
+            if($state == "on")
+            {
+                $gpio_on = shell_exec("/usr/local/bin/gpio -g write $pin 1");
+                echo "LED is on";
+            }
+            else if($state == "off")
+            {
+                $gpio_off = shell_exec("/usr/local/bin/gpio -g write $pin 0");
+                echo "LED is off";
+            }
+        }
+    ?>
+</body>
+</html>
+                
